@@ -1,0 +1,31 @@
+{
+  "name": "api-miniblog",
+  "version": "1.0.0",
+  "description": "API REST para gestionar autores y publicaciones del blog de DevSpark",
+  "main": "servidor.js",
+  "scripts": {
+    "iniciar": "node servidor.js",
+    "dev": "node --watch servidor.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:cobertura": "vitest run --coverage",
+    "test:db": "node db/probar-conexion.js"
+  },
+  "keywords": ["express", "postgresql", "pg", "rest-api", "openapi", "swagger", "railway"],
+  "author": "Jorge Alberto Monsalve",
+  "license": "ISC",
+  "vitest": {
+    "environment": "node"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "pg": "^8.20.0",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.6",
+    "supertest": "^7.2.2",
+    "vitest": "^4.1.6"
+  }
+}

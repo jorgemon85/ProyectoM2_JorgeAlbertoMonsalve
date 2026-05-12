@@ -1,0 +1,16 @@
+# Dependencias de Node
+node_modules/
+
+# Variables de entorno con credenciales reales (NUNCA subir a GitHub)
+.env
+
+# Archivos de cobertura de tests
+coverage/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

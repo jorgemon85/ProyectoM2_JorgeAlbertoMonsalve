@@ -12,7 +12,7 @@ info:
 servers:
   - url: http://localhost:3000
     description: Servidor local de desarrollo
-  - url: https://api-miniblog.up.railway.app
+  - url: https://proyectom2jorgealbertomonsalve-production.up.railway.app
     description: Servidor de producción en Railway
 
 tags:

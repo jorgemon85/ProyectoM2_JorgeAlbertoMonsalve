@@ -1,35 +1,35 @@
-# API MiniBlog
+# 📝 API MiniBlog
 
 API REST para gestionar autores y publicaciones de un blog.  
 Proyecto integrador del Módulo 2 — Curso Full Stack.
 
 ---
 
-## Probar la API en producción
+## 🚀 Probar la API en producción
 
-La API está desplegada en Railway y se puede probar directamente desde el navegador sin instalar nada:
+La API está desplegada en Railway y se puede probar **directamente desde el navegador** sin instalar nada:
 
-**Swagger UI (producción):**  
-https://proyectom2jorgealbertomonsalve-production.up.railway.app/api-docs/
+> 📖 **Swagger UI (producción):**  
+> 👉 https://proyectom2jorgealbertomonsalve-production.up.railway.app/api-docs/
 
-**URL base de producción:**  
-https://proyectom2jorgealbertomonsalve-production.up.railway.app
+> 🌐 **URL base de producción:**  
+> https://proyectom2jorgealbertomonsalve-production.up.railway.app
 
 ---
 
-## Tecnologías
+## 🛠️ Tecnologías
 
 | Herramienta | Uso |
 |---|---|
-| Node.js + Express | Servidor y rutas HTTP |
-| PostgreSQL + pg | Base de datos relacional |
-| Swagger UI | Documentación interactiva de la API |
-| Vitest + Supertest | Tests automatizados |
-| Railway | Deploy y base de datos en la nube |
+| ⚙️ Node.js + Express | Servidor y rutas HTTP |
+| 🐘 PostgreSQL + pg | Base de datos relacional |
+| 📄 Swagger UI | Documentación interactiva de la API |
+| ✅ Vitest + Supertest | Tests automatizados |
+| ☁️ Railway | Deploy y base de datos en la nube |
 
 ---
 
-## Estructura del proyecto
+## 📁 Estructura del proyecto
 
 ```
 api-miniblog/
@@ -58,11 +58,11 @@ api-miniblog/
 
 ---
 
-## Fragmentos de código importantes
+## 💡 Fragmentos de código importantes
 
-### 1. Inyección de dependencias para tests
+### 🔌 1. Inyección de dependencias para tests
 
-El patrón más importante del proyecto. `crearApp` recibe el pool de base de datos como parámetro en lugar de importarlo directamente. Esto permite que los tests le pasen un pool falso y corran sin necesidad de tener PostgreSQL instalado.
+El patrón más importante del proyecto. `crearApp` recibe el pool de base de datos como parámetro en lugar de importarlo directamente. Esto permite que los tests le pasen un pool falso y corran **sin necesidad de tener PostgreSQL instalado**.
 
 ```js
 // app.js
@@ -102,7 +102,7 @@ const crearRutasAutores = (pool = poolPorDefecto) => {
 
 ---
 
-### 2. Capa de servicios — separación de lógica de negocio
+### 🏗️ 2. Capa de servicios — separación de lógica de negocio
 
 Los servicios contienen todas las queries a la base de datos. Las rutas solo se encargan de recibir la petición, validar y enviar la respuesta. Esta separación hace el código más organizado y fácil de mantener.
 
@@ -130,7 +130,7 @@ const crear = async (pool, { nombre, email, bio }) => {
 
 ---
 
-### 3. Query con JOIN para publicaciones de un autor
+### 🔗 3. Query con JOIN para publicaciones de un autor
 
 Este endpoint devuelve las publicaciones junto con los datos del autor en un solo objeto anidado, usando `json_build_object` de PostgreSQL para armar el campo `autor` directamente en la query.
 
@@ -183,9 +183,9 @@ La respuesta tiene esta forma:
 
 ---
 
-### 4. Validaciones de entrada
+### 🛡️ 4. Validaciones de entrada
 
-Antes de tocar la base de datos, cada petición pasa por un validador que revisa tipos, campos obligatorios y longitudes. Si hay errores los acumula todos y los devuelve juntos, para que el cliente sepa de una vez qué tiene que corregir.
+Antes de tocar la base de datos, cada petición pasa por un validador que revisa tipos, campos obligatorios y longitudes. Si hay errores los **acumula todos y los devuelve juntos**, para que el cliente sepa de una vez qué tiene que corregir.
 
 ```js
 // validators/autorValidator.js
@@ -224,9 +224,9 @@ Si la validación falla, la respuesta tiene esta forma:
 
 ---
 
-### 5. Middleware global de errores
+### ⚠️ 5. Middleware global de errores
 
-Todos los errores del sistema llegan a este middleware gracias a `next(error)`. Express lo reconoce como manejador de errores por tener exactamente 4 parámetros (`err, req, res, next`). Centraliza las respuestas de error en un solo lugar.
+Todos los errores del sistema llegan a este middleware gracias a `next(error)`. Express lo reconoce como manejador de errores por tener exactamente **4 parámetros** (`err, req, res, next`). Centraliza las respuestas de error en un solo lugar.
 
 ```js
 // middlewares/manejadorErrores.js
@@ -253,7 +253,7 @@ const manejadorErrores = (err, req, res, next) => {
 
 ---
 
-### 6. Tests automatizados con mocks
+### 🧪 6. Tests automatizados con mocks
 
 Los tests usan un pool falso (`poolFalso`) en lugar de conectarse a PostgreSQL. Gracias a la inyección de dependencias del punto 1, `pool.query` se reemplaza con una función mock que devuelve lo que cada test necesita.
 
@@ -297,17 +297,17 @@ describe('POST /api/autores', () => {
 
 ---
 
-## Endpoints
+## 📌 Endpoints
 
-### Autores `/api/autores`
+### 👤 Autores — `/api/autores`
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| GET | `/api/autores` | Lista todos los autores |
-| GET | `/api/autores/:id` | Obtiene un autor por ID |
-| POST | `/api/autores` | Crea un nuevo autor |
-| PUT | `/api/autores/:id` | Actualiza un autor existente |
-| DELETE | `/api/autores/:id` | Elimina un autor y sus publicaciones |
+| `GET` | `/api/autores` | Lista todos los autores |
+| `GET` | `/api/autores/:id` | Obtiene un autor por ID |
+| `POST` | `/api/autores` | Crea un nuevo autor |
+| `PUT` | `/api/autores/:id` | Actualiza un autor existente |
+| `DELETE` | `/api/autores/:id` | Elimina un autor y sus publicaciones |
 
 **Ejemplo — crear autor:**
 ```json
@@ -319,16 +319,16 @@ POST /api/autores
 }
 ```
 
-### Publicaciones `/api/publicaciones`
+### 📰 Publicaciones — `/api/publicaciones`
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| GET | `/api/publicaciones` | Lista todas las publicaciones |
-| GET | `/api/publicaciones/:id` | Obtiene una publicación por ID |
-| GET | `/api/publicaciones/autor/:autorId` | Lista publicaciones de un autor con sus datos |
-| POST | `/api/publicaciones` | Crea una nueva publicación |
-| PUT | `/api/publicaciones/:id` | Actualiza una publicación existente |
-| DELETE | `/api/publicaciones/:id` | Elimina una publicación |
+| `GET` | `/api/publicaciones` | Lista todas las publicaciones |
+| `GET` | `/api/publicaciones/:id` | Obtiene una publicación por ID |
+| `GET` | `/api/publicaciones/autor/:autorId` | Lista publicaciones de un autor con sus datos |
+| `POST` | `/api/publicaciones` | Crea una nueva publicación |
+| `PUT` | `/api/publicaciones/:id` | Actualiza una publicación existente |
+| `DELETE` | `/api/publicaciones/:id` | Elimina una publicación |
 
 **Ejemplo — crear publicación:**
 ```json
@@ -343,31 +343,31 @@ POST /api/publicaciones
 
 ---
 
-## Correr el proyecto en local
+## ⚡ Correr el proyecto en local
 
 ### Requisitos previos
-- Node.js
-- PostgreSQL
+- 🟢 Node.js
+- 🐘 PostgreSQL
 
 ### Pasos
 
-**1. Clonar el repositorio**
+**1️⃣ Clonar el repositorio**
 ```bash
 git clone https://github.com/jorgemon85/ProyectoM2_JorgeAlbertoMonsalve.git
 cd ProyectoM2_JorgeAlbertoMonsalve
 ```
 
-**2. Instalar dependencias**
+**2️⃣ Instalar dependencias**
 ```bash
 npm install
 ```
 
-**3. Crear el archivo de variables de entorno**
+**3️⃣ Crear el archivo de variables de entorno**
 ```bash
 cp .env.example .env
 ```
 
-**4. Editar `.env` con tus datos de PostgreSQL**
+**4️⃣ Editar `.env` con tus datos de PostgreSQL**
 ```env
 PUERTO=3000
 DB_HOST=localhost
@@ -378,56 +378,57 @@ DB_PASSWORD=tu_password
 DATABASE_SSL=false
 ```
 
-**5. Crear la base de datos y las tablas**
+**5️⃣ Crear la base de datos y las tablas**
 ```bash
 psql -U postgres -c "CREATE DATABASE miniblog_db;"
 psql -U postgres -d miniblog_db -f db/setup.sql
 ```
 
-El script `setup.sql` crea las tablas e inserta datos de ejemplo para probar de inmediato.
+> El script `setup.sql` crea las tablas e inserta datos de ejemplo para probar de inmediato.
 
-**6. Verificar la conexión**
+**6️⃣ Verificar la conexión**
 ```bash
 npm run test:db
 ```
 
-**7. Iniciar el servidor**
+**7️⃣ Iniciar el servidor**
 ```bash
 npm run dev
 ```
 
-El servidor queda corriendo en `http://localhost:3000`  
-La documentación local en `http://localhost:3000/api-docs`
+✅ El servidor queda corriendo en `http://localhost:3000`  
+📖 La documentación local en `http://localhost:3000/api-docs`
 
 ---
 
-## Tests
+## 🧪 Tests
 
 ```bash
 npm test
 ```
 
 El proyecto cuenta con **62 tests automatizados** distribuidos en 5 archivos que cubren:
-- Operaciones CRUD de autores y publicaciones
-- Casos de error (404, 400, email duplicado, autor inexistente)
-- Validaciones de campos obligatorios
+
+- ✅ Operaciones CRUD de autores y publicaciones
+- ❌ Casos de error (404, 400, email duplicado, autor inexistente)
+- 🛡️ Validaciones de campos obligatorios
 
 ---
 
-## Scripts disponibles
+## 📜 Scripts disponibles
 
 | Script | Descripción |
 |---|---|
-| `npm run dev` | Servidor en modo desarrollo con recarga automática |
-| `npm start` | Servidor en modo producción |
-| `npm test` | Ejecuta todos los tests |
-| `npm run test:watch` | Tests en modo watch |
-| `npm run test:cobertura` | Tests con reporte de cobertura |
-| `npm run test:db` | Verifica la conexión a la base de datos |
+| `npm run dev` | 🔄 Servidor en modo desarrollo con recarga automática |
+| `npm start` | ▶️ Servidor en modo producción |
+| `npm test` | ✅ Ejecuta todos los tests |
+| `npm run test:watch` | 👀 Tests en modo watch |
+| `npm run test:cobertura` | 📊 Tests con reporte de cobertura |
+| `npm run test:db` | 🐘 Verifica la conexión a la base de datos |
 
 ---
 
-## Deploy en Railway
+## ☁️ Deploy en Railway
 
 La aplicación y la base de datos están alojadas en Railway.  
 La conexión usa `DATABASE_URL` con SSL habilitado.
@@ -442,6 +443,6 @@ DATABASE_SSL=true
 
 ---
 
-## Uso de IA
+## 🤖 Uso de IA
 
 Usé Claude (Anthropic) como asistente durante el desarrollo. Me ayudó a entender conceptos, revisar errores y estructurar el código. Todo lo revisé y busqué entender antes de seguir avanzando.
